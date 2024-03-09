@@ -1,7 +1,6 @@
 #!/usr/bin/python3
-import models
 import datetime
-import uuid4
+import uuid
 
 class BaseModel:
     """
@@ -21,21 +20,23 @@ class BaseModel:
         self.updated_at = datetime.datetime.now()
 
     def __str__(self):
-    """
-    returns the string rep of the basemodel instance.
-    """
-    return "[{}] ({}) {}".format(
-            self.__class__.__name__, self.id, self.__dict__)
+        """
+        Returns the string representation of BaseModel instance.
+
+        """
+        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
-    """
-    records when an instance is updated to the current time.
-    """
-    self.updated_at = datetime.datetime.now()
+        """
+        Records when instance of BaseModel is updated.
+
+        """
+        self.updated_at = datetime.datetime.now()
 
     def to_dict(self):
         """
         Returns the dixtionary representation of the BaseModel instance.
+
         """
         bs_dict = self.__dict__.copy()
         bs_dict['__class__'] = self.__class__.__name__
