@@ -1,7 +1,8 @@
 #!/usr/bin/python3
-import datetime
+from datetime import datetime
 import unittest
 from models.base_model import BaseModel
+
 
 class TestBaseModel(unittest.TestCase):
     """
@@ -13,7 +14,7 @@ class TestBaseModel(unittest.TestCase):
         innitilizes instance testing BaseModel.
 
         """
-        self.base_model= BaseModel()
+        self.base_model = BaseModel()
 
     def test_id_str(self):
         """
@@ -61,6 +62,7 @@ class TestBaseModel(unittest.TestCase):
         """
         dict_rp = self.base_model.to_dict()
         self.assertIsInstance(dict_rp, dict)
+
 
 if __name__ == "__main__":
     unittest.main()
