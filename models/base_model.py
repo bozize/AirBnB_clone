@@ -36,7 +36,7 @@ class BaseModel:
         Records when instance of BaseModel is updated.
 
         """
-        self.updated_at = datetime.datetime.now()
+        self.updated_at = datetime.now()
 
     def to_dict(self):
         """
