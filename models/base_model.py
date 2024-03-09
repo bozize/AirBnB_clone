@@ -2,18 +2,22 @@
 import datetime
 import uuid
 
+
 class BaseModel:
     """
+
     For this BaseModel we have.
 
     Artributes:
     id:the id of the BaseModel unique one.
     created_at: the time the model is created.
     updated_at; the time the model is updated.
+
     """
     def __init__(self):
         """
         initializes the basemodel.
+
         """
         self.id = str(uuid.uuid4())
         self.created_at = datetime.datetime.now()
@@ -24,7 +28,8 @@ class BaseModel:
         Returns the string representation of BaseModel instance.
 
         """
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(
+                self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
         """
@@ -35,7 +40,7 @@ class BaseModel:
 
     def to_dict(self):
         """
-        Returns the dixtionary representation of the BaseModel instance.
+        Returns the dixtionary representation of the dict.
 
         """
         bs_dict = self.__dict__.copy()
