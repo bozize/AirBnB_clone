@@ -3,12 +3,12 @@ import datetime
 import unittest
 from models.base_model import BaseModel
 
-class TestBaseModel(unittest.Testcase):
+class TestBaseModel(unittest.TestCase):
     """
     Test cases of the BaseModel.
 
     """
-    def innit(self):
+    def setUp(self):
         """
         innitilizes instance testing BaseModel.
 
@@ -31,7 +31,7 @@ class TestBaseModel(unittest.Testcase):
 
     def test_updated_at_datetime(self):
         """
-        confirming if created at is datetime.
+        confirming if updated time is datetime.
 
         """
         self.assertIsInstance(self.base_model.created_at, datetime.datetime)
