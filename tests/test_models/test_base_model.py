@@ -27,14 +27,14 @@ class TestBaseModel(unittest.TestCase):
         confirming if created time is datetime.
 
         """
-        self.assertIsInstance(self.base_model.created_at, datetime.datetime)
+        self.assertIsInstance(self.base_model.created_at, datetime)
 
     def test_updated_at_datetime(self):
         """
         confirming if updated time is datetime.
 
         """
-        self.assertIsInstance(self.base_model.created_at, datetime.datetime)
+        self.assertIsInstance(self.base_model.created_at, datetime)
 
     def test_str(self):
         """
