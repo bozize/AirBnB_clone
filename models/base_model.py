@@ -22,7 +22,7 @@ class BaseModel:
         if kwargs:
             # iterste over the key word #
             for key, value in kwargs.items():
-                #if key != "__class__":#
+                if key != "__class__":
                     if key in ["created_at", "updated_at"]:
                         value = datetime.fromisoformat(value)
                         setattr(self, key, value)
