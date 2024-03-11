@@ -37,7 +37,7 @@ class FileStorage:
             ser_objects[key] = obj.to_dict()
 
 
-        with open(self.__file_path, w) as file:
+        with open(self.__file_path, 'w') as file:
             json.dump(ser_objects, file)
 
 
@@ -47,14 +47,14 @@ class FileStorage:
         from json to __objects.
         """
         try:
-            with open(self.__file_path, r) as file:
+            with open(self.__file_path, 'r') as file:
                 loading_objects = json.load(file)
 
             for key, obj_dict in loading_objects.items():
-            class_name, obj_id = key.split('.')
-            class_ref = eval(class_name)
-            obj = class_ref(**obj_dict)
-            self.__objects[key] = obj
+                class_name, obj_id = key.split('.')
+                class_ref = eval(class_name)
+                obj = class_ref(**obj_dict)
+                self.__objects[key] = obj
         except FileNotFoundError:
             pass
 
