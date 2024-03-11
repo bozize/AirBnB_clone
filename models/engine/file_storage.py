@@ -35,7 +35,7 @@ class FileStorage:
         for key, obj in self.__class__.__objects.items():
             ser_objects[key] = obj.to_dict()
 
-        with open(self.__file_path, 'w') as storage:
+        with open(FileStorage.__file_path, 'w') as storage:
             json.dump(ser_objects, storage)
 
     def reload(self):
