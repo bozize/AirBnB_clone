@@ -32,8 +32,8 @@ class FileStorage:
         __objects to JSON file.
         """
         ser_objects = {}
-        for key, obj in self.__class__.__objects.items():
-            ser_objects[key] = obj.to_dict()
+        for key, value in self.__class__.__objects.items():
+            ser_objects[key] = value.to_dict()
 
         with open(FileStorage.__file_path, 'w') as storage:
             json.dump(ser_objects, storage)
