@@ -32,7 +32,7 @@ class FileStorage:
         __objects to JSON file.
         """
         ser_objects = {}
-        for key, obj in self.__objects.items():
+        for key, obj in self.__class__.__objects.items():
             ser_objects[key] = obj.to_dict()
 
         with open(self.__file_path, 'w') as storage:
