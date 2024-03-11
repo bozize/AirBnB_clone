@@ -1,6 +1,6 @@
-#!/usr/bi/python3
+#!/usr/bin/python3
 import json
-from models.base_model import BaseModel
+
 
 class FileStorage:
     """
@@ -10,7 +10,6 @@ class FileStorage:
 
     __file_path = "file.json"
     __objects = {}
-
 
     def all(self):
         """
@@ -36,10 +35,8 @@ class FileStorage:
         for key, obj in self.__objects.items():
             ser_objects[key] = obj.to_dict()
 
-
         with open(self.__file_path, 'w') as file:
             json.dump(ser_objects, file)
-
 
     def reload(self):
         """
@@ -57,4 +54,3 @@ class FileStorage:
                 self.__objects[key] = obj
         except FileNotFoundError:
             pass
-
