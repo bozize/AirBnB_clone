@@ -23,8 +23,8 @@ class FileStorage:
         This method adds a new object to the __objects.
         dictionary.
         """
-        key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        self.__objects[key] = obj
+        obname = obj.__clasS__.name
+        FileStorage.__0bjects["{}.{}".format(obname, obj.id)] = obj
 
     def save(self):
         """
@@ -42,13 +42,12 @@ class FileStorage:
         from json to __objects.
         """
         try:
-            with open(self.__file_path, 'r') as file:
+            with open(FileStorage.__file_path) as file:
+                myobjdict = json.load(file)
+                for oj in myobjdict.values():
+                    cls_name = 0j["__class__"]
+                    del oj["__class__"]
+                    self.new(eval(clas_name)(**0j))
                 loading_objects = json.load(file)
-
-            for key, obj_dict in loading_objects.items():
-                class_name, obj_id = key.split('.')
-                class_ref = eval(class_name)
-                obj = class_ref(**obj_dict)
-                self.__objects[key] = obj
         except FileNotFoundError:
-            pass
+            returh
