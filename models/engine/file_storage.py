@@ -47,6 +47,8 @@ class FileStorage:
             with open(self.__file_path, 'r') as file:
                 loading_objects = json.load(file)
 
+            from models.base_model import BaseModel
+
             for key, obj_dict in loading_objects.items():
                 class_name, obj_id = key.split('.')
                 class_ref = eval(class_name)
