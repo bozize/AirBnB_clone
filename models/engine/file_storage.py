@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-import os
 import json
 
 
@@ -17,7 +16,7 @@ class FileStorage:
         This method returns the __objects dictionary.
         that contains all stored objects.
         """
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """
@@ -32,12 +31,10 @@ class FileStorage:
         This method serializes all objects in.
         __objects to JSON file.
         """
-        ser_objects = {}
-        for key in self.__objects:
-            ser_objects[key] = self.__objects[key].to_dict()
-
-        with open(FileStorage.__file_path, 'w', encoding="UTF-8") as storage:
-            json.dump(ser_objects, storage)
+        mydict = FileStorage.__objects
+        myobjdict = {obj: mydict[obj].to_dict() for obj in mydict.keys()}
+        with open(FileStorage.__file_path, "w") as file:
+            json.dump(myobjdict, file)
 
     def reload(self):
         """
