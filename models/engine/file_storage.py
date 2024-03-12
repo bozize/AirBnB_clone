@@ -29,7 +29,7 @@ class FileStorage:
         This method adds a new object to the __objects.
         dictionary.
         """
-        obname = obj.__class__.name
+        obname = obj.__class__.__name__
         FileStorage.__objects["{}.{}".format(obname, obj.id)] = obj
 
     def save(self):
@@ -50,9 +50,9 @@ class FileStorage:
         try:
             with open(FileStorage.__file_path) as file:
                 myobjdict = json.load(file)
-                for oj in myobjdict.values():
-                    cls_name = oj["__class__"]
-                    del oj["__class__"]
-                    self.new(eval(cls_name)(**0j))
+                for obj in myobjdict.values():
+                    cls_name = obj["__class__"]
+                    del obj["__class__"]
+                    self.new(eval(cls_name)(**obj))
         except FileNotFoundError:
             return

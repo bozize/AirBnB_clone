@@ -5,6 +5,7 @@ Module console
 import cmd
 import re
 from shlex import split
+from models import storage
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -120,8 +121,9 @@ class HBNBCommand(cmd.Cmd):
         elif argm[0] not in HBNBCommand.__classes:
             print("** class doesnt exist **")
         else:
-            print(eval(argm[0])().id)
-            storage.save
+            new_instance = eval(argm[0])()
+            print(new_instance.id)
+            storage.save()
 
     def do_destroy(self, arg):
         """
@@ -154,9 +156,9 @@ class HBNBCommand(cmd.Cmd):
             objm = []
             for obj in storage.all().values():
                 if len(argm) > 0 and argm[0] == obj.__class__.__name__:
-                    objm.append(obj.__str__())
+                    objm.append(str(obj))
                 elif len(argm) == 0:
-                    objm.append(obj.__str__())
+                    objm.append(str(obj))
             print(objm)
 
     def do_count(self, arg):
