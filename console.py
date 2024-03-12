@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Module consule
+Module console
 """
 import cmd
 import re
@@ -189,7 +189,7 @@ class HBNBCommand(cmd.Cmd):
         if len(argm) == 1:
             print("** indtance id missing **")
             return False
-        if "{}.{}".format(arg[0], arg[1]) not in myobjdict.keys():
+        if "{}.{}".format(argm[0], argm[1]) not in myobjdict.keys():
             print("** found no instance **")
             return False
         if len(argm) == 2:
@@ -200,7 +200,7 @@ class HBNBCommand(cmd.Cmd):
             return False
 
         obj = myobjdict["{}.{}".format(argm[0], argm[1])]
-        if argm[2] in ["id", "created-at", "updated_at"]:
+        if argm[2] in ["id", "created_at", "updated_at"]:
             print("** cannot update **")
             return False
 
