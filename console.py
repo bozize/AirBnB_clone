@@ -118,7 +118,8 @@ class HBNBCommand(cmd.Cmd):
         elif arg[0] not in HBNBCommand.__classes:
             print("** class doesnt exist **")
         else:
-            print(eval(argm[0])().id)
+            new_instance = eval(argm[0])()
+            print(new_instance.id)
             storage.save()
 
     def do_destroy(self, arg):
@@ -191,28 +192,20 @@ class HBNBCommand(cmd.Cmd):
             print("** missing attribute name **")
             return False
         if len(argm) == 3:
-            try:
-                type(eval(argm[2])) != dict
-            except NameError:
-                print("** missing value **")
-                return False
+            print("** value misiing **")
+            return False
 
-        if len(argm) == 4:
-            obj = myobjdict["{}.{}".format(argm[0], argm[1])]
-            if argm[2] in obj.__class__.__dict.keys():
-                attr_type = type(obj.__class__.__dict__[argm[2]])
-                obj.__dict[argm[2]] = attr_type(argm[3])
-            else:
-                obj.__dict__[argm[2]] = argm[3]
-        elif type(eval(argm[2])) == dict:
-            obj = myobjdict["{}.{}".format(argm[0], argm[1])]
-            for k, v in eval(argm[2]).items():
-                if (k in obj.__class__.__dict__.keys() and
-                        type(obj.__class__.__dict__[k]) in {str, int, float}):
-                    attr_type = type(obj.__class__.dict__[k])
-                    obj.__dict__[k] = attr_type[v]
-                else:
-                    obj.__dict__[k] = v
+        obj = myobjdict["{}.{}".format(argm[0], argm[1])]
+        if argm[2] in ["id", "created-at", "updated_at"]:
+            print("** cannot update **")
+            return False
+
+        if argm[2] not in obj.__class__.__dict.keys():
+            print("** attribute doesnt exist ** ")
+            return False
+
+        attr_type = type(obj.__class__.__dict__[argm[2]])
+        obj.__dict[argm[2]] = attr_type(argm[3])
         storage.save()
 
 
