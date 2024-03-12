@@ -182,14 +182,15 @@ class HBNBCommand(cmd.Cmd):
         if len(argm) == 0:
             print("** missing class name **")
             return False
-        if argm[0] not in HBNBCommand._classes:
+        if argm[0] not in HBNBCommand.__classes:
             print("** class does not exist **")
             return False
         if len(argm) == 1:
             print("** indtance id missing **")
             return False
-        if "{}.{}".format(argm[0], argm[1]) not in myobjdict.keys():
-            print("** found no instance **")
+        obj_key = "{}.{}".format(argm[0], argm[1])
+        if obj_key not in myobjdict.keys():
+            print("** no instance found **")
             return False
         if len(argm) == 2:
             print("** missing attribute name **")
@@ -198,17 +199,21 @@ class HBNBCommand(cmd.Cmd):
             print("** value misiing **")
             return False
 
-        obj = myobjdict["{}.{}".format(argm[0], argm[1])]
-        if argm[2] in ["id", "created_at", "updated_at"]:
+        obj = myobjdict[obj_key]
+        attr_name = argm[2]
+        attr_value = argm[3]
+
+        if attr_name in ["id", "created_at", "updated_at"]:
             print("** cannot update **")
             return False
 
-        if argm[2] not in obj.__class__.__dict.keys():
-            print("** attribute doesnt exist ** ")
-            return False
+        try:
+            getattr(obj, attr_name)
+        except AttributeError:
+            print("** atrribute doesnt exist **")
 
-        attr_type = type(obj.__class__.__dict__[argm[2]])
-        setattr(obj, argm[2], attr_type(argm[3]))
+        attr_type = type(getattr(obj, attr_name))
+        setattr(obj, attr_name, attr_type(attr_value))
         storage.save()
 
 
