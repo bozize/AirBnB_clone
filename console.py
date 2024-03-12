@@ -11,22 +11,24 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
+
 def parse(arg):
-        curly_braces = re.search(r"\{(.*?)\}", arg)
-        brackets = re.search(r"\[(.*?)\]", arg)
-        if curly_braces is None:
-            if brackets is None:
-                return [i.strip(",") for i in split(arg)]
-            else:
-                lexer = split(arg[:brackets.span()[0]])
-                retl = [i.strip(",") for i in lexer]
-                retl.append(brackets.group())
-                return retl
+    curly_braces = re.search(r"\{(.*?)\}", arg)
+    brackets = re.search(r"\[(.*?)\]", arg)
+    if curly_braces is None:
+        if brackets is None:
+            return [i.strip(",") for i in split(arg)]
         else:
-            lexer = split(arg[:curly_braces.span()[0]])
+            lexer = split(arg[:brackets.span()[0]])
             retl = [i.strip(",") for i in lexer]
-            retl.append(curly_braces.group())
+            retl.append(brackets.group())
             return retl
+    else:
+        lexer = split(arg[:curly_braces.span()[0]])
+        retl = [i.strip(",") for i in lexer]
+        retl.append(curly_braces.group())
+        return retl
+
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -40,7 +42,7 @@ class HBNBCommand(cmd.Cmd):
             "State",
             "City",
             "Place",
-            "Amenity"
+            "Amenity",
             "Review"
     }
 
@@ -72,7 +74,7 @@ class HBNBCommand(cmd.Cmd):
                     call = "{} {}".format(argm[0], command[1])
                     return argdict[command[0]](call)
             print("*** Unknown syntax: {}".format(arg))
-            return false
+            return False
 
     def do_quit(self, arg):
         """
@@ -123,7 +125,7 @@ class HBNBCommand(cmd.Cmd):
         """
         command deletes class instance given id.
         """
-        argm == parse(arg)
+        argm = parse(arg)
         myobjdict = storage.all()
         if len(argm) == 0:
             print("** missing class name **")
@@ -173,7 +175,7 @@ class HBNBCommand(cmd.Cmd):
         argm = parse(arg)
         myobjdict = storage.all()
 
-        if len(argn) == 0:
+        if len(argm) == 0:
             print("** missing class name **")
             return False
         if argm[0] not in HBNBCommand._classes:
@@ -214,6 +216,5 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
 
 
-    if __name__ == "__main__":
-        HBNBCommand().cmdloop()
-
+if __name__ == "__main__":
+    HBNBCommand().cmdloop()
