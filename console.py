@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Command line interpretir."""
 import cmd
 import re
 from shlex import split
