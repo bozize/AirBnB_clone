@@ -3,6 +3,7 @@ from datetime import datetime
 import uuid
 from models import storage
 
+
 class BaseModel:
     """
 
@@ -38,8 +39,9 @@ class BaseModel:
         Returns the string representation of BaseModel instance.
 
         """
+        obname = self.__class__.__name__
         return "[{}] ({}) {}".format(
-                self.__class__.__name__, self.id, self.__dict__)
+                obname, self.id, self.__dict__)
 
     def save(self):
         """
@@ -55,7 +57,7 @@ class BaseModel:
 
         """
         bs_dict = self.__dict__.copy()
-        bs_dict['__class__'] = self.__class__.__name__
-        bs_dict['created_at'] = self.created_at.isoformat()
-        bs_dict['updated_at'] = self.updated_at.isoformat()
+        bs_dict["__class__"] = self.__class__.__name__
+        bs_dict["created_at"] = self.created_at.isoformat()
+        bs_dict["updated_at"] = self.updated_at.isoformat()
         return bs_dict

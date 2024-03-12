@@ -1,5 +1,11 @@
 #!/usr/bin/python3
 import json
+from models.base_model import BaseModel
+from models.user import User
+from models.amenity import amenity
+from models.place import Place
+from models.city import City
+from models.review import Review
 
 
 class FileStorage:
@@ -47,7 +53,6 @@ class FileStorage:
                 for oj in myobjdict.values():
                     cls_name = 0j["__class__"]
                     del oj["__class__"]
-                    self.new(eval(clas_name)(**0j))
-                loading_objects = json.load(file)
+                    self.new(eval(cls_name)(**0j))
         except FileNotFoundError:
-            returh
+            return
