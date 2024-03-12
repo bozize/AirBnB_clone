@@ -2,7 +2,7 @@
 import json
 from models.base_model import BaseModel
 from models.user import User
-from models.amenity import amenity
+from models.amenity import Amenity
 from models.place import Place
 from models.city import City
 from models.review import Review
@@ -29,8 +29,8 @@ class FileStorage:
         This method adds a new object to the __objects.
         dictionary.
         """
-        obname = obj.__clasS__.name
-        FileStorage.__0bjects["{}.{}".format(obname, obj.id)] = obj
+        obname = obj.__class__.name
+        FileStorage.__objects["{}.{}".format(obname, obj.id)] = obj
 
     def save(self):
         """
@@ -51,7 +51,7 @@ class FileStorage:
             with open(FileStorage.__file_path) as file:
                 myobjdict = json.load(file)
                 for oj in myobjdict.values():
-                    cls_name = 0j["__class__"]
+                    cls_name = oj["__class__"]
                     del oj["__class__"]
                     self.new(eval(cls_name)(**0j))
         except FileNotFoundError:
