@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Command line interpretir."""
+"""
+Module consule
+"""
 import cmd
 import re
 from shlex import split
