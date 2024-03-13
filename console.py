@@ -5,7 +5,8 @@ Module console
 import cmd
 import re
 from shlex import split
-from models import storage
+import models
+from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -98,7 +99,7 @@ class HBNBCommand(cmd.Cmd):
         of a class instance of a given id.
         """
         argm = parse(arg)
-        myobjdict = storage.all()
+        myobjdict = models.storage.all()
         if len(argm) == 0:
             print("** missing class name **")
         elif argm[0] not in HBNBCommand.__classes:
@@ -123,7 +124,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             new_instance = eval(argm[0])()
             print(new_instance.id)
-            storage.save()
+            models.storage.save()
 
     def do_destroy(self, arg):
         """
@@ -154,12 +155,12 @@ class HBNBCommand(cmd.Cmd):
             print("** class does not exist **")
         else:
             objm = []
-            for obj in storage.all().values():
+            for obj in models.storage.all().values():
                 if len(argm) > 0 and argm[0] == obj.__class__.__name__:
-                    objm.append(str(obj))
+                    objm.append(obj.__str__())
                 elif len(argm) == 0:
-                    objm.append(str(obj))
-            print(objm)
+                    objm.append(obj.__str__())
+                    print(objm)
 
     def do_count(self, arg):
         """
@@ -214,7 +215,7 @@ class HBNBCommand(cmd.Cmd):
 
         attr_type = type(getattr(obj, attr_name))
         setattr(obj, attr_name, attr_type(attr_value))
-        storage.save()
+        models.storage.save()
 
 
 if __name__ == "__main__":

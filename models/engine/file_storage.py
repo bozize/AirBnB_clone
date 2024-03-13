@@ -37,6 +37,7 @@ class FileStorage:
         This method serializes all objects in.
         __objects to JSON file.
         """
+        from models import storage
         mydict = FileStorage.__objects
         myobjdict = {obj: mydict[obj].to_dict() for obj in mydict.keys()}
         with open(FileStorage.__file_path, "w") as file:
