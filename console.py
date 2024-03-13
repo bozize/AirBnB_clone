@@ -154,12 +154,10 @@ class HBNBCommand(cmd.Cmd):
         if len(argm) > 0 and argm[0] not in HBNBCommand.__classes:
             print("** class does not exist **")
         else:
-            objm = []
             for obj in models.storage.all().values():
                 if len(argm) > 0 and argm[0] == obj.__class__.__name__:
-                    objm.append(obj.__str__())
+                    print(obj)
                 elif len(argm) == 0:
-                    objm.append(obj.__str__())
                     print(objm)
 
     def do_count(self, arg):
