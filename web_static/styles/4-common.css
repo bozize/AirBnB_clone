@@ -1,16 +1,16 @@
-html {
-    position: relative;
-    min-height: 100vh;
-}
 body {
-    margin: 0;
-    padding: 0;
-    color: #484848;
-    font-size: 14px;
-    font-family: Circular, "Helvetiva Neue", Helvetica, Arial, sans-serif;
+	color: #484848;
+	font-size: 14px;
+	font-family: Circular, "Helvetica Neue", Helvetia, Arial, sans-serif;
+	width: 100%;
+	height: 80%;
+	padding: 0;
+	margin: 0;
+	display: block;
 }
+
 .container {
-    max-width: 10000px;
-    margin: 30px auto;
-    bottom: 30px;
+	max-width: 1000px;
+	height: max-content;
+	margin: 30px auto;
 }
